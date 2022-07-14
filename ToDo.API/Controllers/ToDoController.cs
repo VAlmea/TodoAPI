@@ -43,6 +43,8 @@ namespace ToDo.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ActivityResponseDTO>> Create(ActivityRequestDTO item)
         {
             if (!ModelState.IsValid)
@@ -69,7 +71,7 @@ namespace ToDo.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ActivityResponseDTO>> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             await _toDoService.DeleteActivityAsync(id);
             return NoContent();
@@ -80,7 +82,7 @@ namespace ToDo.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<ActionResult<ActivityResponseDTO>> Update(int id, ActivityRequestDTO requestModel)
+        public async Task<IActionResult> Update(int id, ActivityRequestDTO requestModel)
         {
             var activity = _mapper.Map<Activity>(requestModel);
             await _toDoService.UpdateActivityAsync(id, activity);
