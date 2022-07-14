@@ -6,11 +6,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ToDo.Common\ToDo.Common.csproj" />
+	  <Compile Remove="Exceptions\BadRequest\**" />
+	  <EmbeddedResource Remove="Exceptions\BadRequest\**" />
+	  <None Remove="Exceptions\BadRequest\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Exceptions\BadRequest\" />
+		<ProjectReference Include="..\ToDo.Common\ToDo.Common.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

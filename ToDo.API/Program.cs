@@ -13,7 +13,7 @@ IConfiguration configuration = builder.Configuration;
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddDbContext<ToDoDbContext>(options =>
-options.UseSqlite("Data Source=ToDo.db"));
+        options.UseSqlite("Data Source=ToDo.db"));
 }
 
 // Add services to the container.
