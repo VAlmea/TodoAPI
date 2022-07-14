@@ -1,4 +1,5 @@
-﻿using ToDo.Data.Entities;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using ToDo.Data.Entities;
 
 namespace ToDo.Services
 {
@@ -13,5 +14,7 @@ namespace ToDo.Services
         Task<Activity> UpdateActivityAsync(int Id, Activity activity);
 
         Task<int> DeleteActivityAsync(int Id);
+
+        Task<Activity> PatchActivityAsync(int Id, JsonPatchDocument<Activity> patchDocument);
     }
 }

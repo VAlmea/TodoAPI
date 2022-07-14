@@ -1,9 +1,11 @@
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Common.DTO.Request;
 using ToDo.Common.DTO.Response;
 using ToDo.Data.Entities;
 using ToDo.Services;
+using ToDo.Services.Impl;
 
 namespace ToDo.API.Controllers
 {
@@ -62,16 +64,6 @@ namespace ToDo.API.Controllers
             return Ok(result);
         }
 
-        ///// <summary>
-        ///// Get ToDo item
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpPut("{id}")]
-        //public async Task<ActionResult<ActivityResponseDTO>> Update(int id, ActivityRequestDTO activity)
-        //{
-        //    return NoContent(result);
-        //}
-
         /// <summary>
         /// Delete ToDo item
         /// </summary>
@@ -81,6 +73,30 @@ namespace ToDo.API.Controllers
         {
             await _toDoService.DeleteActivityAsync(id);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Update Todo item
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ActivityResponseDTO>> Update(int id, ActivityRequestDTO requestModel)
+        {
+            var activity = _mapper.Map<Activity>(requestModel);
+            await _toDoService.UpdateActivityAsync(id, activity);
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Patch Todo item
+        /// </summary>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<ActivityResponseDTO>> Patch(int id, [FromBody] JsonPatchDocument<Activity> patchDoc)
+        {
+            var activity = await _toDoService.PatchActivityAsync(id, patchDoc);
+            var responseDTO = _mapper.Map<ActivityResponseDTO>(activity);
+            return Ok(responseDTO);
         }
     }
 }
