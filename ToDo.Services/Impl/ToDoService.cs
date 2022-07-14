@@ -61,7 +61,7 @@ namespace ToDo.Services.Impl
         {
             Activity activity = await _uow.ToDoRepository.FirstOrDefaultAsync(a => a.Id == id);
             patchDocument.ApplyTo(activity);
-
+            activity.UpdatedAt = DateTime.Now;
             await _uow.ToDoRepository.UpdateAsync(activity, id);
             await _uow.CommitAsync();
             return activity;

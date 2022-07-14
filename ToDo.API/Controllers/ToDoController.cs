@@ -52,7 +52,7 @@ namespace ToDo.API.Controllers
         ///     {
         ///        "id": 1,
         ///        "name": "Item #1",
-        ///        "isComplete": true
+        ///        "Completed": false
         ///     }
         ///
         /// </remarks>
