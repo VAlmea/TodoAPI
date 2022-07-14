@@ -6,10 +6,9 @@ In the root folder excecute the command:
 
 ```console
  dotnet restore
-```
- 
+``` 
 ```console
  cd ToDo.API
-  dotnet run
+ dotnet run
 ```
 
